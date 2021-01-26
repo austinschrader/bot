@@ -54,7 +54,7 @@ namespace Microsoft.BotBuilderSamples
                 new PromptOptions
                 {
                     Prompt = MessageFactory.Text("Would you like to be roasted or toasted?."),
-                    Choices = ChoiceFactory.ToChoices(new List<string> { "Toast me!", "Roast me!", "Bicycle" }),
+                    Choices = ChoiceFactory.ToChoices(new List<string> { "Toast me!", "Roast me!"}),
                 }, cancellationToken);
         }
 

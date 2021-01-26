@@ -16,15 +16,16 @@ namespace Microsoft.BotBuilderSamples
         public string Text;
         public string AlteredText;
         public enum Intent {
-            BookFlight,
-            Cancel,
-            GetWeather,
+            Roast,
+            Toast,
             None
         };
         public Dictionary<Intent, IntentScore> Intents;
 
         public class _Entities
         {
+
+            public string[] RoastToast;
 
             // Built-in entities
             public DateTimeSpec[] datetime;

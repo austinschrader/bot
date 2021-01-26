@@ -152,7 +152,7 @@ namespace Microsoft.BotBuilderSamples
                 //     msg += $" and your age as {userProfile.Age}";
                 // }
 
-                msg += ".";
+                // msg += ".";
 
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text(msg), cancellationToken);
 

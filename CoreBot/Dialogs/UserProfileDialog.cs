@@ -27,10 +27,10 @@ namespace Microsoft.BotBuilderSamples
             {
                 TransportStepAsync,
                 NameStepAsync,
-                NameConfirmStepAsync,
-                AgeStepAsync,
-                PictureStepAsync,
-                ConfirmStepAsync,
+                //NameConfirmStepAsync,
+                //AgeStepAsync,
+                //PictureStepAsync,
+                //ConfirmStepAsync,
                 SummaryStepAsync,
             };
 
@@ -142,15 +142,15 @@ namespace Microsoft.BotBuilderSamples
 
                 userProfile.Transport = (string)stepContext.Values["transport"];
                 userProfile.Name = (string)stepContext.Values["name"];
-                userProfile.Age = (int)stepContext.Values["age"];
-                userProfile.Picture = (Attachment)stepContext.Values["picture"];
+                //userProfile.Age = (int)stepContext.Values["age"];
+                //userProfile.Picture = (Attachment)stepContext.Values["picture"];
 
                 var msg = $"I have your mode of transport as {userProfile.Transport} and your name as {userProfile.Name}";
 
-                if (userProfile.Age != -1)
-                {
-                    msg += $" and your age as {userProfile.Age}";
-                }
+                // if (userProfile.Age != -1)
+                // {
+                //     msg += $" and your age as {userProfile.Age}";
+                // }
 
                 msg += ".";
 

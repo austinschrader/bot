@@ -29,9 +29,9 @@ namespace Microsoft.BotBuilderSamples
                 TransportStepAsync,
                 NameStepAsync,
                 NameConfirmStepAsync,
-                AgeStepAsync,
-                PictureStepAsync,
-                ConfirmStepAsync,
+                //AgeStepAsync,
+                //PictureStepAsync,
+                //ConfirmStepAsync,
                 SummaryStepAsync,
       };
 

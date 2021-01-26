@@ -53,8 +53,8 @@ namespace Microsoft.BotBuilderSamples
             return await stepContext.PromptAsync(nameof(ChoicePrompt),
                 new PromptOptions
                 {
-                    Prompt = MessageFactory.Text("Please enter your mode of transport."),
-                    Choices = ChoiceFactory.ToChoices(new List<string> { "Car", "Bus", "Bicycle" }),
+                    Prompt = MessageFactory.Text("Would you like to be roasted or toasted?."),
+                    Choices = ChoiceFactory.ToChoices(new List<string> { "Toast me!", "Roast me!", "Bicycle" }),
                 }, cancellationToken);
         }
 

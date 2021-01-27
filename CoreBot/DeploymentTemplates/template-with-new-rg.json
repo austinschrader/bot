@@ -76,8 +76,7 @@
         "resourcesLocation": "[parameters('newAppServicePlanLocation')]",
         "webAppName": "[if(empty(parameters('newWebAppName')), parameters('botId'), parameters('newWebAppName'))]",
         "siteHost": "[concat(variables('webAppName'), '.azurewebsites.net')]",
-        "botEndpoint": "[concat('https://', variables('siteHost'), '/api/messages')]",
-        "resourceGroupId": "[concat(subscription().id, '/resourceGroups/', parameters('groupName'))]"
+        "botEndpoint": "[concat('https://', variables('siteHost'), '/api/messages')]"
     },
     "resources": [
         {
@@ -85,7 +84,8 @@
             "type": "Microsoft.Resources/resourceGroups",
             "apiVersion": "2018-05-01",
             "location": "[parameters('groupLocation')]",
-            "properties": {}
+            "properties": {
+            }
         },
         {
             "type": "Microsoft.Resources/deployments",
@@ -121,7 +121,7 @@
                             "location": "[variables('resourcesLocation')]",
                             "kind": "app",
                             "dependsOn": [
-                                "[concat(variables('resourceGroupId'), '/providers/Microsoft.Web/serverfarms/', variables('appServicePlanName'))]"
+                                "[resourceId('Microsoft.Web/serverfarms/', variables('appServicePlanName'))]"
                             ],
                             "name": "[variables('webAppName')]",
                             "properties": {
@@ -147,8 +147,7 @@
                                             "https://botservice.hosting.portal.azure.net",
                                             "https://hosting.onecloud.azure-test.net/"
                                         ]
-                                    },
-                                    "webSocketsEnabled": true
+                                    }
                                 }
                             }
                         },
@@ -172,7 +171,7 @@
                                 "storageResourceId": null
                             },
                             "dependsOn": [
-                                "[concat(variables('resourceGroupId'), '/providers/Microsoft.Web/sites/', variables('webAppName'))]"
+                                "[resourceId('Microsoft.Web/sites/', variables('webAppName'))]"
                             ]
                         }
                     ],

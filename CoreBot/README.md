@@ -1,4 +1,4 @@
-# CoreBot
+# ConsultingBot
 
 Bot Framework v4 core bot sample.
 
@@ -19,36 +19,32 @@ This bot uses [LUIS](https://www.luis.ai), an AI based cognitive service, to imp
 
 ### Install .NET Core CLI
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 2.1
 
   ```bash
   # determine dotnet version
   dotnet --version
   ```
 
+- If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/).
+- Install the latest version of the [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) tool. Version 2.0.54 or higher.
+
 ### Create a LUIS Application to enable language understanding
 
-The LUIS model for this example can be found under `CognitiveModels/FlightBooking.json` and the LUIS language model setup, training, and application configuration steps can be found [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-v4-luis?view=azure-bot-service-4.0&tabs=cs).
-
-Once you created the LUIS model, update `appsettings.json` with your `LuisAppId`, `LuisAPIKey` and `LuisAPIHostName`.
-
-```json
-  "LuisAppId": "Your LUIS App Id",
-  "LuisAPIKey": "Your LUIS Subscription key here",
-  "LuisAPIHostName": "Your LUIS App region here (i.e: westus.api.cognitive.microsoft.com)"
-```
+LUIS language model setup, training, and application configuration steps can be found [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-v4-luis?view=azure-bot-service-4.0&tabs=cs).
 
 ## To try this sample
 
-- Clone the repository
+- In a terminal, navigate to `ConsultingBot`
 
     ```bash
-    git clone https://github.com/microsoft/botbuilder-samples.git
+    # change into project folder
+    cd ConsultingBot
     ```
 
-- Run the bot from a terminal or from Visual Studio:
+- Run the bot from a terminal or from Visual Studio, choose option A or B.
 
-  A) From a terminal, navigate to `samples/csharp_dotnetcore/13.core-bot`
+  A) From a terminal
 
   ```bash
   # run the bot
@@ -59,15 +55,15 @@ Once you created the LUIS model, update `appsettings.json` with your `LuisAppId`
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/csharp_dotnetcore/13.core-bot` folder
-  - Select `CoreBot.csproj` file
+  - Navigate to `ConsultingBot` folder
+  - Select `ConsultingBot.csproj` file
   - Press `F5` to run the project
 
 ## Testing the bot using Bot Framework Emulator
 
 [Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
 
-- Install the latest Bot Framework Emulator from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
+- Install the Bot Framework Emulator version 4.3.0 or greater from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
 
 ### Connect to the bot using Bot Framework Emulator
 

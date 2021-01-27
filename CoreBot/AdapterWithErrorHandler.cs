@@ -1,38 +1,38 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
+//
+// Generated with Bot Builder V4 SDK Template for Visual Studio CoreBot v4.3.0
 
 using System;
+using ConsultingBot.Middleware;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Microsoft.Bot.Builder.TraceExtensions;
-using Microsoft.Bot.Schema;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Logging;
 
-namespace Microsoft.BotBuilderSamples
+namespace ConsultingBot
 {
     public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
     {
-        public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger, ConversationState conversationState = null)
-            : base(configuration, logger)
+        public AdapterWithErrorHandler(ICredentialProvider credentialProvider, ILogger<BotFrameworkHttpAdapter> logger, StripBotMention stripBotMentionMiddleware, ConversationState conversationState = null)
+            : base(credentialProvider)
         {
+            if (stripBotMentionMiddleware != null)
+            {
+                Use(stripBotMentionMiddleware);
+            }
+
             OnTurnError = async (turnContext, exception) =>
             {
                 // Log any leaked exception from the application.
-                // NOTE: In production environment, you should consider logging this to
-                // Azure Application Insights. Visit https://aka.ms/bottelemetry to see how
-                // to add telemetry capture to your bot.
-                logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
+                logger.LogError($"Exception caught : {exception.Message}");
 
-                // Send a message to the user
-                var errorMessageText = "The bot encountered an error or bug.";
-                var errorMessage = MessageFactory.Text(errorMessageText, errorMessageText, InputHints.IgnoringInput);
-                await turnContext.SendActivityAsync(errorMessage);
-
-                errorMessageText = "To continue to run this bot, please fix the bot source code.";
-                errorMessage = MessageFactory.Text(errorMessageText, errorMessageText, InputHints.ExpectingInput);
-                await turnContext.SendActivityAsync(errorMessage);
-
+                // Send a catch-all apology to the user.
+#if (!DEBUG)
+                await turnContext.SendActivityAsync("Sorry, something went wrong.");
+#else
+                await turnContext.SendActivityAsync($"Sorry, something went wrong: {exception.Message}");
+#endif
                 if (conversationState != null)
                 {
                     try
@@ -44,12 +44,9 @@ namespace Microsoft.BotBuilderSamples
                     }
                     catch (Exception e)
                     {
-                        logger.LogError(e, $"Exception caught on attempting to Delete ConversationState : {e.Message}");
+                        logger.LogError($"Exception caught on attempting to Delete ConversationState : {e.Message}");
                     }
                 }
-
-                // Send a trace activity, which will be displayed in the Bot Framework Emulator
-                await turnContext.TraceActivityAsync("OnTurnError Trace", exception.Message, "https://www.botframework.com/schemas/error", "TurnError");
             };
         }
     }
